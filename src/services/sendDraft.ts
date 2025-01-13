@@ -1,24 +1,32 @@
-import axios from 'axios';
 import dotenv from 'dotenv';
+import { sendToWeixin } from './weixin';
+
 dotenv.config();
 
-export async function sendDraft(draft_post: string) {
-  try {
-    const response = await axios.post(
-      process.env.SLACK_WEBHOOK_URL || '',
-      {
-        text: draft_post,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+const BARK_URL = process.env.BARK_KEY ? `https://api.day.app/${process.env.BARK_KEY}` : '';
 
-    return `Success sending draft to webhook at ${new Date().toISOString()}`;
+// 发送Bark通知
+async function sendBarkNotification(title: string, body: string) {
+  if (!process.env.BARK_KEY) {
+    return;
+  }
+  
+  try {
+    await fetch(`${BARK_URL}/${encodeURIComponent(title)}/${encodeURIComponent(body)}`);
   } catch (error) {
-    console.log('error sending draft to webhook');
-    console.log(error);
+    console.error('Failed to send Bark notification:', error);
+  }
+}
+
+export async function sendDraft(content: string) {
+  try {
+    await sendToWeixin(content, "SwCSRjrdGJNaWioRQUHzgHJZrV6TNIA3EAaKJabbh4hKjw1instlmsOt9MlN20xo");
+    await sendBarkNotification('文章发送成功', '内容已成功发送到微信');
+    console.log('Draft sent successfully');
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    await sendBarkNotification('文章发送失败', `错误: ${errorMsg}`);
+    console.error('Error sending draft:', error);
+    throw error;
   }
 }

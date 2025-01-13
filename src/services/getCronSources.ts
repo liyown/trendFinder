@@ -16,7 +16,7 @@ export async function getCronSources() {
       // High priority sources (Only 1 x account due to free plan rate limits)
       ...(hasFirecrawlKey ? [
         { identifier: 'https://www.firecrawl.dev/blog' },
-        { identifier: 'https://openai.com/news/' },
+        { identifier: 'https://ai-bot.cn/daily-ai-news/' },
         { identifier: 'https://www.anthropic.com/news' },
         { identifier: 'https://news.ycombinator.com/' },
         { identifier: 'https://www.reuters.com/technology/artificial-intelligence/' },
@@ -24,17 +24,17 @@ export async function getCronSources() {
         { identifier: 'https://buttondown.com/ainews/archive/' },
       ] : []),
       ...(hasXApiKey ? [
-        { identifier: 'https://x.com/skirano' },
+        // { identifier: 'https://x.com/skirano' },
       // Official AI Companies
-      // { identifier: 'https://x.com/OpenAIDevs' },
-      // { identifier: 'https://x.com/xai' },
-      // { identifier: 'https://x.com/alexalbert__' },
-      // { identifier: 'https://x.com/leeerob' },
-      // { identifier: 'https://x.com/v0' },
-      // { identifier: 'https://x.com/aisdk' },
-      // { identifier: 'https://x.com/firecrawl_dev' },
-      // { identifier: 'https://x.com/AIatMeta' },
-      // { identifier: 'https://x.com/googleaidevs' },
+      { identifier: 'https://x.com/OpenAIDevs' },
+      { identifier: 'https://x.com/xai' },
+      { identifier: 'https://x.com/alexalbert__' },
+      { identifier: 'https://x.com/leeerob' },
+      { identifier: 'https://x.com/v0' },
+      { identifier: 'https://x.com/aisdk' },
+      { identifier: 'https://x.com/firecrawl_dev' },
+      { identifier: 'https://x.com/AIatMeta' },
+      { identifier: 'https://x.com/googleaidevs' },
 
       // Additional AI Companies
       // { identifier: 'https://x.com/MistralAI' },
@@ -54,7 +54,7 @@ export async function getCronSources() {
       // { identifier: 'https://x.com/nutlope' },
       // { identifier: 'https://x.com/rauchg' },
 
-      // AI Tools & Platforms
+      // // AI Tools & Platforms
       // { identifier: 'https://x.com/vercel' },
       // { identifier: 'https://x.com/LangChainAI' },
       // { identifier: 'https://x.com/llama_index' },

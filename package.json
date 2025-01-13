@@ -31,6 +31,7 @@
     "playht": "^0.13.0",
     "resend": "^4.0.1-alpha.0",
     "together-ai": "^0.9.0",
+    "trend-finder": "file:",
     "ts-node-dev": "^2.0.0"
   }
 }
